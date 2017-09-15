@@ -59,7 +59,7 @@ p { margin:0; }
   color: #ffffff;
 }
 .bg-2 {
-  background-color: #fe553d; 
+  background-color: #fe553d;
   color: #ffffff;
 }
 .bg-3 {
@@ -75,7 +75,7 @@ p { margin:0; }
 
 /* About me section */
 .list-group li:first-child, .list-group li:last-child {
-	border-radius: 0px 0px 0px 0px;
+  border-radius: 0px 0px 0px 0px;
 }
 .list-group-item {
   background-color: #ffffff;
@@ -111,7 +111,7 @@ p { margin:0; }
   outline: none;
   text-decoration: none;
   color: black;
-} 
+}
 #projects a:hover {
   color: grey;
 }
@@ -122,12 +122,12 @@ form {
   margin-left: 10%;
 }
 .form-control {
-	border-radius: 0px;
+  border-radius: 0px;
 }
 input[type='submit'] {
-	background-color: #2f2f2f;
-	color: white;
-	border-radius: 0px;
+  background-color: #2f2f2f;
+  color: white;
+  border-radius: 0px;
 }
 textarea[type="text"]:focus,
 input[type="text"]:focus,
@@ -144,14 +144,14 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus {   
+.uneditable-input:focus {
   border-color: #2f2f2f;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.6);
   outline: 0 none;
 }
 input[type='submit']:hover {
   background-color: #4F5565;
-  color: white; 
+  color: white;
 }
 #form-messages {
   padding-bottom: 10px;
