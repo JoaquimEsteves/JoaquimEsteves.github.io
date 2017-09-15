@@ -1,0 +1,54 @@
+body {
+  font-family: 'Oxygen', sans-serif;
+  line-height: 1.8;
+}
+
+p { margin:0; }
+
+/* Navbar */
+.navbar {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
+  font-size: 20px;
+  background-color: #f2f3f4 ;
+  /* For a fixed nav bar */
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+.navbar-nav li a:hover {
+  color: #1abc9c;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: black;
+  height: 3px;
+}
+.navbar-brand {
+  font-size: 20px;
+}
+
+#contact{
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+/* Section container */
+.container-fluid {
+  padding-bottom: 70px;
+}
+
+.row {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.title {
+  padding-bottom: 30px;
+}
+
+/* Media only screens */
+@media only screen and (max-width: 767px) {
+  .icon {display:none!important;}
+}
