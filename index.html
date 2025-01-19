@@ -1,6 +1,6 @@
 <style>
   :root {
-    --bg: #f4ecd8;
+    --bg: white;
     --txt: #444;
   }
 
@@ -30,7 +30,7 @@
   body {
     line-height: 1.5;
     margin: 40px auto;
-    /** Magic number 
+    /** Magic number
      *  It's the maximum for a normal A4 page
      */
     max-width: max(66%, 8.5in);
@@ -38,7 +38,7 @@
     padding: 0;
 
     color: var(--txt);
-    /* background-color: var(--bg); */
+    background-color: var(--bg);
     font-size: 18px;
 
     -webkit-font-smoothing: antialiased;
@@ -54,17 +54,50 @@
 
   *[title]:not([title=""]) {
     text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+
+  /**
+   * Ensure `title` works on mobile.
+   * Remember that you need to add `"tabindex"=0`
+   * I didn't bother and just slapped some javascript on it
+   */
+  @media (pointer: coarse), (hover: none) {
+    [title] {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+    }
+
+    [title]:focus::after {
+      content: attr(title);
+      position: absolute;
+      top: 90%;
+      color: black;
+      background-color: white;
+      border: 1px dashed;
+      width: max-content;
+      padding-inline: 1rem;
+      font-weight: normal;
+      font-style: normal;
+    }
   }
 
   .experience {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     list-style-type: none;
+    grid-gap: 1rem;
+    padding-left: 0;
   }
 
   .experience li {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
+    place-items: center;
+
+    border: 1px solid;
+    padding: 1em;
   }
 
   @media print {
@@ -92,18 +125,30 @@
       page-break-after: always;
     }
   }
+
+  .with_boop {
+  }
+
+  .boop_animation {
+    animation: boop 1s linear;
+    animation-fill-mode: both;
+  }
 </style>
 
-<h1>Joaquim Esteves</h1>
+<h1 class="with_boop">Joaquim Esteves</h1>
 
 <div class="hide_in_print">
   <p>This website is basically my CV.</p>
   <p>
     You can safely print it with <code>Ctrl+P</code>, since it was designed with
     <span
-      title="For example this whole paragraph will disappear. Try it, press Ctrl-P or"
+      title="For example this whole paragraph will disappear. Try it, press Ctrl-P"
       >printing in mind</span
     >.
+  </p>
+  <p class="hide_in_print">
+    Whenever you see some underlined text that means it has a tooltip.
+    <span title="Hi!👋. I work on mobile too">Hover me.</span>
   </p>
 </div>
 <p>The page is split into a short, and a detailed section.</p>
@@ -226,28 +271,39 @@
 >
   Stuff I Used to be good at
 </h2>
-<p>PHP, Java, C</p>
+<p>PHP, Java, C, C++</p>
 
 <a name="professional-experience"></a>
 
 <h2>Professional Experience</h2>
 
 <ul class="experience">
-  <li>
+  <li class="with_boop">
     <p>Senior Developer</p>
-    <p><span title="Collaboration Betters The World">CBTW</span></p>
+    <p>
+      <a
+        href="https://web.archive.org/web/20241204232552/https://collaborationbetterstheworld.com/"
+        >CBTW</a
+      >
+    </p>
     <p>April 2020 - Present</p>
   </li>
 
-  <li>
+  <li class="with_boop">
     <p>Developer</p>
-    <p>AKKA Technologies</p>
+    <a
+      href="https://web.archive.org/web/20220120012011/https://www.akka-technologies.com/"
+      >AKKA Technologies</a
+    >
     <p>Jan 2018 - Feb 2020</p>
   </li>
 
-  <li>
+  <li class="with_boop">
     <p>Internship - Developer</p>
-    <p>Bridge Robotics</p>
+    <a
+      href="https://web.archive.org/web/20170802054252/http://bridgerobotics.com/"
+      >Bridge Robotics</a
+    >
     <p>July 2016 - August 2016</p>
   </li>
 </ul>
@@ -304,8 +360,8 @@
   <code>
     <pre>
   ETL -> DB -> AI -> App -> UI
-                     ^ I worked here
-  ^-------------- I worked here too!
+                     ^ and here!
+  ^-------------- I worked here!
     </pre>
   </code>
 
@@ -327,12 +383,12 @@
   </p>
 
   <strong>Tech Stack</strong>
-  <p>FastAPI, Pandas, Numpy, SQL, Python (some React)t</p>
+  <p>FastAPI, Pandas, Numpy, SQL, Python (some React)</p>
 </div>
 
 <div id="kpmg_2" class="pagebreak">
   <h3>KPMG Luxembourg</h3>
-  <h4>Through CBTW : from 05/2022 - 08/2022</h4>
+  <h4>Through CBTW : from 05/2022 to 08/2022</h4>
   <hr />
   <p>Context:</p>
 
@@ -547,9 +603,9 @@
     use their expensive IOT technology at a minimal cost of entry.
   </p>
   <p>
-    SIGFOX, an IOT company, created a small and cheap entry level kit that
-    customers to play with beforing plunging into the world of IOT. The focus of
-    the project was to create a complete simulation of the SIGFOX backend.
+    SIGFOX created a small and cheap entry level kit for customers to play with
+    beforing plunging into the world of IOT. The focus of the project was to
+    create a complete simulation of the SIGFOX backend.
   </p>
 
   <strong>Wut I did:</strong>
@@ -562,3 +618,520 @@
   <strong>Tech Stack</strong>
   Python (with a particular focus on the async library), Docker, Selenium.
 </div>
+
+<script>
+  // Fix tooltips for movile
+  if (/Mobi|Android/i.test(navigator.userAgent)) {
+    document.querySelectorAll("*[title]").forEach((elm) => {
+      elm.tabIndex = 0;
+    });
+  }
+
+  // Not ideal since if the user goes in and out it doesn't work as well.
+  // I'm going to call this close enough
+  document.querySelectorAll(".with_boop").forEach((booper) => {
+    booper.addEventListener("animationend", function (e) {
+      booper.classList.remove("boop_animation");
+    });
+    booper.addEventListener("mouseover", function (e) {
+      booper.classList.add("boop_animation");
+    });
+    booper.addEventListener("focusin", function (e) {
+      booper.classList.add("boop_animation");
+    });
+  });
+</script>
+
+<style>
+  /* Un-important styles here */
+
+  /* BOOP - ask me how I got this cute animation in an interview :)*/
+  @keyframes boop {
+    from {
+      transform: translate(0px, 0.432136px);
+    }
+    to {
+      transform: translate(0px, 0.432136px);
+    }
+    0.6211180124223602% {
+      transform: translate(0px, 0.822383px);
+    }
+    1.2422360248447204% {
+      transform: translate(0px, 1.39523px);
+    }
+    1.8633540372670807% {
+      transform: translate(0px, 1.90153px);
+    }
+    2.484472049689441% {
+      transform: translate(0px, 2.46344px);
+    }
+    3.1055900621118013% {
+      transform: translate(0px, 3.2833px);
+    }
+    3.7267080745341614% {
+      transform: translate(0px, 4.05144px);
+    }
+    4.3478260869565215% {
+      transform: translate(0px, 4.7363px);
+    }
+    4.968944099378882% {
+      transform: translate(0px, 5.55408px);
+    }
+    5.590062111801243% {
+      transform: translate(0px, 6.4975px);
+    }
+    6.211180124223603% {
+      transform: translate(0px, 7.31698px);
+    }
+    6.832298136645963% {
+      transform: translate(0px, 8.11902px);
+    }
+    7.453416149068323% {
+      transform: translate(0px, 9.93367px);
+    }
+    8.074534161490684% {
+      transform: translate(0px, 10.3236px);
+    }
+    8.695652173913043% {
+      transform: translate(0px, 10.6966px);
+    }
+    9.316770186335404% {
+      transform: translate(0px, 10.9646px);
+    }
+    9.937888198757763% {
+      transform: translate(0px, 11.4686px);
+    }
+    10.559006211180124% {
+      transform: translate(0px, 11.9996px);
+    }
+    11.180124223602485% {
+      transform: translate(0px, 12.4661px);
+    }
+    11.801242236024844% {
+      transform: translate(0px, 12.8658px);
+    }
+    12.422360248447205% {
+      transform: translate(0px, 13.1542px);
+    }
+    13.043478260869565% {
+      transform: translate(0px, 13.461px);
+    }
+    13.664596273291925% {
+      transform: translate(0px, 12.8212px);
+    }
+    14.285714285714286% {
+      transform: translate(0px, 12.5671px);
+    }
+    14.906832298136646% {
+      transform: translate(0px, 11.7664px);
+    }
+    15.527950310559007% {
+      transform: translate(0px, 11.0619px);
+    }
+    16.149068322981368% {
+      transform: translate(0px, 10.1459px);
+    }
+    16.770186335403725% {
+      transform: translate(0px, 9.14752px);
+    }
+    17.391304347826086% {
+      transform: translate(0px, 7.9311px);
+    }
+    18.012422360248447% {
+      transform: translate(0px, 7.14222px);
+    }
+    18.633540372670808% {
+      transform: translate(0px, 5.0428px);
+    }
+    19.25465838509317% {
+      transform: translate(0px, 4.39549px);
+    }
+    19.875776397515526% {
+      transform: translate(0px, 3.59333px);
+    }
+    20.496894409937887% {
+      transform: translate(0px, 0.848455px);
+    }
+    21.11801242236025% {
+      transform: translate(0px, 0.28366px);
+    }
+    21.73913043478261% {
+      transform: translate(0px, -0.126309px);
+    }
+    22.36024844720497% {
+      transform: translate(0px, -0.523764px);
+    }
+    22.981366459627328% {
+      transform: translate(0px, -1.74979px);
+    }
+    23.60248447204969% {
+      transform: translate(0px, -2.71063px);
+    }
+    24.22360248447205% {
+      transform: translate(0px, -2.99881px);
+    }
+    24.84472049689441% {
+      transform: translate(0px, -3.91205px);
+    }
+    25.46583850931677% {
+      transform: translate(0px, -4.12127px);
+    }
+    26.08695652173913% {
+      transform: translate(0px, -4.4317px);
+    }
+    26.70807453416149% {
+      transform: translate(0px, -4.82916px);
+    }
+    27.32919254658385% {
+      transform: translate(0px, -5.18035px);
+    }
+    27.950310559006212% {
+      transform: translate(0px, -5.23814px);
+    }
+    28.571428571428573% {
+      transform: translate(0px, -5.31933px);
+    }
+    29.19254658385093% {
+      transform: translate(0px, -5.31175px);
+    }
+    29.81366459627329% {
+      transform: translate(0px, -5.20709px);
+    }
+    30.434782608695652% {
+      transform: translate(0px, -5.09951px);
+    }
+    31.055900621118013% {
+      transform: translate(0px, -4.89539px);
+    }
+    31.677018633540374% {
+      transform: translate(0px, -4.63539px);
+    }
+    32.298136645962735% {
+      transform: translate(0px, -4.32699px);
+    }
+    32.91925465838509% {
+      transform: translate(0px, -4.02996px);
+    }
+    33.54037267080745% {
+      transform: translate(0px, -3.65214px);
+    }
+    34.161490683229815% {
+      transform: translate(0px, -3.06851px);
+    }
+    34.78260869565217% {
+      transform: translate(0px, -2.76338px);
+    }
+    35.40372670807454% {
+      transform: translate(0px, -2.20237px);
+    }
+    36.024844720496894% {
+      transform: translate(0px, -1.95131px);
+    }
+    36.64596273291925% {
+      transform: translate(0px, -1.51425px);
+    }
+    37.267080745341616% {
+      transform: translate(0px, -0.728344px);
+    }
+    37.88819875776397% {
+      transform: translate(0px, -0.554632px);
+    }
+    38.50931677018634% {
+      transform: translate(0px, 0.0482945px);
+    }
+    39.130434782608695% {
+      transform: translate(0px, 0.151355px);
+    }
+    39.75155279503105% {
+      transform: translate(0px, 1.86781px);
+    }
+    40.37267080745342% {
+      transform: translate(0px, 1.92721px);
+    }
+    40.993788819875775% {
+      transform: translate(0px, 1.97516px);
+    }
+    41.61490683229814% {
+      transform: translate(0px, 2.05277px);
+    }
+    42.2360248447205% {
+      transform: translate(0px, 2.05626px);
+    }
+    42.857142857142854% {
+      transform: translate(0px, 2.04972px);
+    }
+    43.47826086956522% {
+      transform: translate(0px, 1.90641px);
+    }
+    44.099378881987576% {
+      transform: translate(0px, 1.85314px);
+    }
+    44.72049689440994% {
+      transform: translate(0px, 1.80878px);
+    }
+    45.3416149068323% {
+      transform: translate(0px, 1.63684px);
+    }
+    45.962732919254655% {
+      transform: translate(0px, 1.53892px);
+    }
+    46.58385093167702% {
+      transform: translate(0px, 1.4345px);
+    }
+    47.20496894409938% {
+      transform: translate(0px, 1.2336px);
+    }
+    47.82608695652174% {
+      transform: translate(0px, 1.11669px);
+    }
+    48.4472049689441% {
+      transform: translate(0px, 0.924895px);
+    }
+    49.06832298136646% {
+      transform: translate(0px, 0.755055px);
+    }
+    49.68944099378882% {
+      transform: translate(0px, 0.610007px);
+    }
+    50.31055900621118% {
+      transform: translate(0px, 0.443496px);
+    }
+    50.93167701863354% {
+      transform: translate(0px, 0.30467px);
+    }
+    51.5527950310559% {
+      transform: translate(0px, 0.00178602px);
+    }
+    52.17391304347826% {
+      transform: translate(0px, -0.190892px);
+    }
+    52.79503105590062% {
+      transform: translate(0px, -0.244174px);
+    }
+    53.41614906832298% {
+      transform: translate(0px, -0.327974px);
+    }
+    54.037267080745345% {
+      transform: translate(0px, -0.390336px);
+    }
+    54.6583850931677% {
+      transform: translate(0px, -0.489051px);
+    }
+    55.27950310559006% {
+      transform: translate(0px, -0.616429px);
+    }
+    55.900621118012424% {
+      transform: translate(0px, -0.654185px);
+    }
+    56.52173913043478% {
+      transform: translate(0px, -0.728593px);
+    }
+    57.142857142857146% {
+      transform: translate(0px, -0.750468px);
+    }
+    57.7639751552795% {
+      transform: translate(0px, -0.775039px);
+    }
+    58.38509316770186% {
+      transform: translate(0px, -0.791607px);
+    }
+    59.006211180124225% {
+      transform: translate(0px, -0.795906px);
+    }
+    59.62732919254658% {
+      transform: translate(0px, -0.78831px);
+    }
+    60.24844720496895% {
+      transform: translate(0px, -0.773343px);
+    }
+    60.869565217391305% {
+      transform: translate(0px, -0.746747px);
+    }
+    61.49068322981366% {
+      transform: translate(0px, -0.711318px);
+    }
+    62.11180124223603% {
+      transform: translate(0px, -0.654569px);
+    }
+    62.732919254658384% {
+      transform: translate(0px, -0.618413px);
+    }
+    63.35403726708075% {
+      transform: translate(0px, -0.563234px);
+    }
+    63.975155279503106% {
+      transform: translate(0px, -0.51249px);
+    }
+    64.59627329192547% {
+      transform: translate(0px, -0.441183px);
+    }
+    65.21739130434783% {
+      transform: translate(0px, -0.376553px);
+    }
+    65.83850931677019% {
+      transform: translate(0px, -0.310949px);
+    }
+    66.45962732919254% {
+      transform: translate(0px, -0.23606px);
+    }
+    67.0807453416149% {
+      transform: translate(0px, -0.180751px);
+    }
+    67.70186335403727% {
+      transform: translate(0px, -0.0577268px);
+    }
+    68.32298136645963% {
+      transform: translate(0px, -0.0247433px);
+    }
+    68.94409937888199% {
+      transform: translate(0px, 0.0070574px);
+    }
+    69.56521739130434% {
+      transform: translate(0px, 0.073764px);
+    }
+    70.1863354037267% {
+      transform: translate(0px, 0.107641px);
+    }
+    70.80745341614907% {
+      transform: translate(0px, 0.150924px);
+    }
+    71.42857142857143% {
+      transform: translate(0px, 0.178737px);
+    }
+    72.04968944099379% {
+      transform: translate(0px, 0.22202px);
+    }
+    72.67080745341615% {
+      transform: translate(0px, 0.245928px);
+    }
+    73.2919254658385% {
+      transform: translate(0px, 0.265848px);
+    }
+    73.91304347826087% {
+      transform: translate(0px, 0.281805px);
+    }
+    74.53416149068323% {
+      transform: translate(0px, 0.297031px);
+    }
+    75.15527950310559% {
+      transform: translate(0px, 0.305582px);
+    }
+    75.77639751552795% {
+      transform: translate(0px, 0.307827px);
+    }
+    76.3975155279503% {
+      transform: translate(0px, 0.306199px);
+    }
+    77.01863354037268% {
+      transform: translate(0px, 0.301406px);
+    }
+    77.63975155279503% {
+      transform: translate(0px, 0.292176px);
+    }
+    78.26086956521739% {
+      transform: translate(0px, 0.277322px);
+    }
+    78.88198757763975% {
+      transform: translate(0px, 0.261032px);
+    }
+    79.5031055900621% {
+      transform: translate(0px, 0.0734907px);
+    }
+    80.12422360248448% {
+      transform: translate(0px, 0.059439px);
+    }
+    80.74534161490683% {
+      transform: translate(0px, 0.0525119px);
+    }
+    81.36645962732919% {
+      transform: translate(0px, 0.0422644px);
+    }
+    81.98757763975155% {
+      transform: translate(0px, 0.0256209px);
+    }
+    82.6086956521739% {
+      transform: translate(0px, 0.00339409px);
+    }
+    83.22981366459628% {
+      transform: translate(0px, -0.014502px);
+    }
+    83.85093167701864% {
+      transform: translate(0px, -0.0537674px);
+    }
+    84.472049689441% {
+      transform: translate(0px, -0.0649345px);
+    }
+    85.09316770186335% {
+      transform: translate(0px, -0.0731318px);
+    }
+    85.71428571428571% {
+      transform: translate(0px, -0.0788416px);
+    }
+    86.33540372670808% {
+      transform: translate(0px, -0.102821px);
+    }
+    86.95652173913044% {
+      transform: translate(0px, -0.107107px);
+    }
+    87.5776397515528% {
+      transform: translate(0px, -0.109878px);
+    }
+    88.19875776397515% {
+      transform: translate(0px, -0.115442px);
+    }
+    88.81987577639751% {
+      transform: translate(0px, -0.117254px);
+    }
+    89.44099378881988% {
+      transform: translate(0px, -0.118797px);
+    }
+    90.06211180124224% {
+      transform: translate(0px, -0.117664px);
+    }
+    90.6832298136646% {
+      transform: translate(0px, -0.116592px);
+    }
+    91.30434782608695% {
+      transform: translate(0px, -0.106449px);
+    }
+    91.92546583850931% {
+      transform: translate(0px, -0.102892px);
+    }
+    92.54658385093168% {
+      transform: translate(0px, -0.0999951px);
+    }
+    93.16770186335404% {
+      transform: translate(0px, -0.0958531px);
+    }
+    93.7888198757764% {
+      transform: translate(0px, -0.0867317px);
+    }
+    94.40993788819875% {
+      transform: translate(0px, -0.0792855px);
+    }
+    95.03105590062111% {
+      transform: translate(0px, -0.0701018px);
+    }
+    95.65217391304348% {
+      transform: translate(0px, -0.0619254px);
+    }
+    96.27329192546584% {
+      transform: translate(0px, -0.0507711px);
+    }
+    96.8944099378882% {
+      transform: translate(0px, -0.0423421px);
+    }
+    97.51552795031056% {
+      transform: translate(0px, -0.0311925px);
+    }
+    98.13664596273291% {
+      transform: translate(0px, -0.0216631px);
+    }
+    98.75776397515529% {
+      transform: translate(0px, -0.0137605px);
+    }
+    99.37888198757764% {
+      transform: translate(0px);
+    }
+  }
+</style>
