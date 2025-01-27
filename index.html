@@ -117,11 +117,18 @@
       line-height: unset;
     }
 
+    a:visited{
+      color: #0000EE;
+    }
+
     a[href]:not([href=""])::after {
-      content: "\A (" attr(href) ") ";
+      content: "\A " attr(href) " ";
       white-space: pre;
     }
 
+    .experience a[href]:not([href=""]) {
+      color: inherit;
+    }
     .experience a[href]:not([href=""])::after {
       content: none;
     }
@@ -346,7 +353,7 @@
 
 <section class="show_in_print" style="position: absolute; bottom: 0; width: 100%">
   <hr />
-  A more up to date version of this document is available to you at
+  A more up to date version of this document is available to you on
   <a href="https://joaquimesteves.github.io/">my website.</a>
 </section>
 
