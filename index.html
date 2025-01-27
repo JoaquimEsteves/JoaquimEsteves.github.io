@@ -105,6 +105,9 @@
     padding: 1em;
   }
 
+  .show_in_print {
+    display: none;
+  }
   @media print {
     body {
       max-width: 8.5in;
@@ -115,7 +118,12 @@
     }
 
     a[href]:not([href=""])::after {
-      content: " (" attr(href) ") ";
+      content: "\A (" attr(href) ") ";
+      white-space: pre;
+    }
+
+    .experience a[href]:not([href=""])::after {
+      content: none;
     }
 
     *[title]:not([title=""]) {
@@ -124,6 +132,10 @@
 
     .hide_in_print {
       display: none;
+    }
+
+    .show_in_print {
+      display: block;
     }
 
     .pagebreak {
@@ -140,54 +152,40 @@
     }
   }
 
-  .inline-block {
-    display: inline-block;
-  }
-
   .with_boop {
-    will-change: transform;
   }
   .boop_animation {
     animation: boop 1s linear;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .boop_animation {
-      animation: unset;
-    }
+  .smooth {
+    /* Exit animations */
+    transition: transform 500ms;
+  }
+  .smooth:hover {
+    transform: scale(1.1);
+
+    /* Enter animation */
+    transition: transform 150ms;
   }
 </style>
 
-<head>
-  <link rel="dns-prefetch" href="https://github.com/JoaquimEsteves" />
-  <link rel="dns-prefetch" href="https://www.linkedin.com/in/joaquim-esteves" />
-  <link
-    rel="dns-prefetch"
-    href="https://exercism.org/profiles/JoaquimEsteves/testimonials"
-  />
-  <link rel="dns-prefetch" href="https://web.archive.org" />
+<h1 class="with_boop">Joaquim Esteves</h1>
 
-  <title>Joaquim Esteves's Brutalist Website</title>
-</head>
 
-<body>
-  <h1 class="with_boop">Joaquim Esteves</h1>
-
-  <div class="hide_in_print">
-    <p>This website is basically my CV.</p>
-    <p>
-      You can safely print it with <code>Ctrl+P</code>, since it was designed
-      with
-      <span
-        title="For example this whole paragraph will disappear. Try it, press Ctrl-P"
-        >printing in mind</span
-      >.
-    </p>
-    <p class="hide_in_print">
-      Whenever you see some underlined text that means it has a tooltip.
-      <span title="Hi!👋. I work on mobile too">Hover me.</span>
-    </p>
-  </div>
+<section class="hide_in_print">
+  <p>This website is basically my CV.</p>
+  <p>
+    You can safely print it with <code>Ctrl+P</code>, since it was designed with
+    <span
+      title="For example this whole paragraph will disappear. Try it, press Ctrl-P"
+      >printing in mind</span
+    >.
+  </p>
+  <p>
+    Whenever you see some underlined text that means it has a tooltip.
+    <span title="Hi!👋. I work on mobile too">Hover me.</span>
+  </p>
   <p>The page is split into a short, and a detailed section.</p>
   <p>
     In the detailed section I'll basically go over the <em>war stories</em>,
@@ -195,480 +193,479 @@
     <em>war stories</em> are organised chronologically, from most recent to
     oldest.
   </p>
+</section>
 
-  <div class="hide_in_print">
-    <h2>Table of contents</h2>
+<div class="hide_in_print">
+  <h2>Table of contents</h2>
 
-    <ul class="toc-outer" role="list">
-      <li>
-        <a href="#short">
-          <span class="title">Short Version</span>
-        </a>
-        <ol role="list" class="toc-inner">
-          <li><a href="#contact"> Contact </a></li>
-          <li><a href="#formal-education"> Formal Education </a></li>
-          <li><a href="#technical-knowledge"> Technical Knowledge </a></li>
-          <ul class="toc-inner-inner">
-            <li><a href="#stuff-im-good-at"> Stuff I'm Good At </a></li>
-            <li>
-              <a href="#stuff-i-used-to-be-good-at">
-                Stuff I Used To Be Good At
-              </a>
-            </li>
-          </ul>
+  <ul class="toc-outer" role="list">
+    <li>
+      <a href="#short">
+        <span class="title">Short Version</span>
+      </a>
+      <ol role="list" class="toc-inner">
+        <li><a href="#contact"> Contact </a></li>
+        <li><a href="#formal-education"> Formal Education </a></li>
+        <li><a href="#technical-knowledge"> Technical Knowledge </a></li>
+        <ul class="toc-inner-inner">
+          <li><a href="#stuff-im-good-at"> Stuff I'm Good At </a></li>
           <li>
-            <a href="#professional-experience">Professional Experience</a>
+            <a href="#stuff-i-used-to-be-good-at">
+              Stuff I Used To Be Good At
+            </a>
           </li>
-        </ol>
-      </li>
-      <li>
-        <a href="#long">
-          <span class="title">Detailed Work Experience (Long Version)</span>
-        </a>
-        <ol role="list" class="toc-inner">
-          <li>
-            <a href="#prosieben">ProSieben Germany</a>
-          </li>
-          <li>
-            <a href="#kpmg_2">KPMG</a>
-          </li>
-          <li>
-            <a href="#noide">Noide.fr</a>
-          </li>
-          <li>
-            <a href="#kpmg_1">KPMG</a>
-          </li>
-          <li>
-            <a href="#post">POST Luxembourg</a>
-          </li>
-          <li>
-            <a href="#orange">Orange S.A.</a>
-          </li>
-          <li>
-            <a href="#hyper">Hyperloop Transportation Technologies</a>
-          </li>
-          <li>
-            <a href="#sigfox">Sigfox</a>
-          </li>
-        </ol>
-      </li>
-    </ul>
-  </div>
-
-  <a name="short" />
-  <section id="contact">
-    <h2>Contact</h2>
-
-    <p>email: <code>joaquimbve@hotmail.com</code></p>
-    <p>
-      <a class="with_boop inline-block" href="https://github.com/JoaquimEsteves">Github</a>
-    </p>
-    <p>
-      <a
-        class="with_boop inline-block"
-        href="https://www.linkedin.com/in/joaquim-esteves"
-        >Linkedin</a
-      >
-    </p>
-    <div>
-      <p>
-        I'm also active on
-        <a
-          href="https://exercism.org/profiles/JoaquimEsteves/testimonials"
-          class="with_boop inline-block"
-          >exercism</a
-        >
-      </p>
-      <p>
-        <code>exercism</code> is a competitive programming platform (like
-        LeetCode) that places a greater emphasis on learning the programming
-        languages.
-      </p>
-      <p>
-        It accomplishes this on through a <em>learning track</em> of easy
-        problems, and mentorship. I've been solving and mentoring people on
-        exercism since the end of April 2024, and quite enjoy it.
-      </p>
-      <p>I speak Portuguese, English, Spanish and some French.</p>
-      <p>Currently learning Bulgarian</p>
-    </div>
-  </section>
-
-  <a name="formal-education"></a>
-  <h2>Formal Education</h2>
-  <p>2017 - Bachelor Degree in Information Systems and Computer Engineering</p>
-  <p>Instituto Superior Técnico</p>
-
-  <a name="technical-knowledge"></a>
-
-  <a name="stuff-im-good-at"></a>
-  <h2
-    tabindex="0"
-    title="ie: Technologies that I've either used recently and mastered"
-  >
-    Stuff I'm Good At
-  </h2>
-  <p>Python, Javascript (Typescript)</p>
-  <p>React, FastAPI, Flask, Pandas.</p>
-  <p>
-    VIM. Docker. WebDev, API development, test-driven development, scrum (and
-    friends)
-  </p>
-  <p>General Linux command line shenanigans.</p>
-  <a name="stuff-i-used-to-be-good-at"></a>
-  <h2
-    title="ie: Technologies that I've not used recently and don't find myself confident in."
-  >
-    Stuff I Used to be good at
-  </h2>
-  <p>PHP, Java, C, C++</p>
-
-  <a name="professional-experience"></a>
-
-  <h2>Professional Experience</h2>
-
-  <ul class="experience">
-    <li class="with_boop">
-      <p>Senior Developer</p>
-      <p>
-        <a
-          href="https://web.archive.org/web/20241204232552/https://collaborationbetterstheworld.com/"
-          >CBTW</a
-        >
-      </p>
-      <p>April 2020 - Present</p>
+        </ul>
+        <li><a href="#professional-experience">Professional Experience</a></li>
+      </ol>
     </li>
-
-    <li class="with_boop">
-      <p>Developer</p>
-      <a
-        href="https://web.archive.org/web/20220120012011/https://www.akka-technologies.com/"
-        >AKKA Technologies</a
-      >
-      <p>Jan 2018 - Feb 2020</p>
-    </li>
-
-    <li class="with_boop">
-      <p>Internship - Developer</p>
-      <a
-        href="https://web.archive.org/web/20170802054252/http://bridgerobotics.com/"
-        >Bridge Robotics</a
-      >
-      <p>July 2016 - August 2016</p>
+    <li>
+      <a href="#long">
+        <span class="title">Detailed Work Experience (Long Version)</span>
+      </a>
+      <ol role="list" class="toc-inner">
+        <li>
+          <a href="#prosieben">ProSieben Germany</a>
+        </li>
+        <li>
+          <a href="#kpmg_2">KPMG</a>
+        </li>
+        <li>
+          <a href="#noide">Noide.fr</a>
+        </li>
+        <li>
+          <a href="#kpmg_1">KPMG</a>
+        </li>
+        <li>
+          <a href="#post">POST Luxembourg</a>
+        </li>
+        <li>
+          <a href="#orange">Orange S.A.</a>
+        </li>
+        <li>
+          <a href="#hyper">Hyperloop Transportation Technologies</a>
+        </li>
+        <li>
+          <a href="#sigfox">Sigfox</a>
+        </li>
+      </ol>
     </li>
   </ul>
+</div>
 
-  <div class="pagebreak"></div>
+<a name="short" />
+<a name="contact" />
+<h2>Contact</h2>
 
-  <a name="long"></a>
-  <h2>Detailed Work Experience</h2>
+<p>email: <code>joaquimbve@hotmail.com</code></p>
+<p>
+  <a href="https://github.com/JoaquimEsteves">Github</a>
+</p>
+<p>
+  <a href="https://www.linkedin.com/in/joaquim-esteves">Linkedin</a>
+</p>
+<div>
+  <p>
+    I'm also active on
+    <a href="https://exercism.org/profiles/JoaquimEsteves/testimonials"
+      >exercism</a
+    >
+  </p>
+  <p>
+    <code>exercism</code> is a competitive programming platform (like LeetCode)
+    that places a greater emphasis on learning the programming languages.
+  </p>
+  <p>
+    It accomplishes this on through a <em>learning track</em> of easy problems,
+    and mentorship. I've been solving and mentoring people on exercism since the
+    end of April 2024, and quite enjoy it.
+  </p>
+  <p>I speak Portuguese, English, Spanish and some French.</p>
+  <p>Currently learning Bulgarian</p>
+</div>
 
-  <p>I've only ever had two jobs really.</p>
+<a name="formal-education"></a>
+<h2>Formal Education</h2>
+<p>2017 - Bachelor Degree in Information Systems and Computer Engineering</p>
+<p>Instituto Superior Técnico</p>
+
+<a name="technical-knowledge"></a>
+
+<a name="stuff-im-good-at"></a>
+<h2 title="ie: Technologies that I've either used recently and mastered">
+  Stuff I'm Good At
+</h2>
+<p>Python, Javascript (Typescript)</p>
+<p>React, FastAPI, Flask, Pandas.</p>
+<p>
+  VIM. Docker. WebDev, API development, test-driven development, scrum (and
+  friends)
+</p>
+<p>General Linux command line shenanigans.</p>
+<a name="stuff-i-used-to-be-good-at"></a>
+<h2
+  title="ie: Technologies that I've not used recently and don't find myself confident in."
+>
+  Stuff I Used to be good at
+</h2>
+<p>PHP, Java, C, C++</p>
+
+<a name="professional-experience"></a>
+
+<h2>Professional Experience</h2>
+
+<ul class="experience">
+  <li class="with_boop">
+    <p>Senior Developer</p>
+    <p>
+      <a
+        href="https://web.archive.org/web/20241204232552/https://collaborationbetterstheworld.com/"
+        >CBTW</a
+      >
+    </p>
+    <p>April 2020 - Present</p>
+  </li>
+
+  <li class="with_boop">
+    <p>Developer</p>
+    <a
+      href="https://web.archive.org/web/20220120012011/https://www.akka-technologies.com/"
+      >AKKA Technologies</a
+    >
+    <p>Jan 2018 - Feb 2020</p>
+  </li>
+
+  <li class="with_boop">
+    <p>Internship - Developer</p>
+    <a
+      href="https://web.archive.org/web/20170802054252/http://bridgerobotics.com/"
+      >Bridge Robotics</a
+    >
+    <p>July 2016 - August 2016</p>
+  </li>
+</ul>
+
+<section class="show_in_print" style="position: absolute; bottom: 0; width: 100%">
+  <hr />
+  A more up to date version of this document is available to you at
+  <a href="https://joaquimesteves.github.io/">my website.</a>
+</section>
+
+<div class="pagebreak"></div>
+
+<a name="long"></a>
+<h2>Detailed Work Experience</h2>
+<section>
+  <p>
+    Despite having 7 years of experience, I've only ever had two jobs really.
+  </p>
   <p>
     Luckily for me, despite the fact that I've only had two employers I've
     worked under a variety of teams. It's the only good part of being a
     consultant, hope you enjoy the war stories!
   </p>
+  <p class="show_in_print">
+    Note: The first page of this document was the <strong>actual</strong> CV. This
+    section is for you to learn a bit more about me; and so I can have some fun with creative writting.
+  </p>
+</section>
+
+<hr />
+<div id="prosieben" class="pagebreak">
+  <h3>ProSieben</h3>
+  <h4>Through CBTW: from 12/2022 to 04/2024</h4>
+  <p>Context:</p>
+
+  <p>ProSieben's Program Planners have a problem.</p>
+  <p>
+    The way movie licensing works is: A company buys the rights to play a movie
+    or show 𝑵 times over a period of 𝐘 years. As a program planner your job is
+    to optimize this, play a movie less than 𝑵 times and you've just lost money,
+    play it at the wrong time and you've just lost market share! (ie: money)
+  </p>
+  <p>
+    Now, program planners are quite good at their jobs, but doing this sort of
+    planning on a large scale is tremendously difficult work.
+  </p>
+  <p>
+    The solution, was to ask the Data Science folks to come up with a model that
+    will first predict market shares(or, the fancier sounding: AI Based
+    Prediction), and then to build a second model that will attempt to create an
+    optimal program (using an even fancier sounding: Constraint Satisfaction
+    Solver)
+  </p>
+  <p>
+    The creation of these models necessitated a large amount of data.
+    Corralling, cleaning and exporting this data was the job of our
+    <em>ETL</em> pipeline.
+  </p>
+
+  <strong>Wut I did:</strong>
+  <p>
+    I was initially hired as Python Developer; mostly to work on the App side of
+    the project
+  </p>
+
+  <code>
+    <pre>
+      ETL -> DB -> AI -> App -> UI
+      ^ and here!
+      ^-------------- I worked here!
+    </pre>
+  </code>
+
+  <p>
+    Once I had proven myself on the <code>App</code> side of the project I was
+    able to transition into the <code>ETL</code> side of the project.
+  </p>
+  <p>
+    This was the first time I had the pleasure to work as a Data-Engineer. I'd
+    always wanted to dip my feet into the Data Science world but I never had the
+    opportunity before.
+  </p>
+
+  <p>
+    Learned a lot of Pandas, a scientific python library; and I was able to
+    leverage my Front-End skills to create what we called "tiny-front-ends".
+    Basically small Websites as GUIs to quickly prototype features, while the
+    main Front-End team lagged behind.
+  </p>
+
+  <strong>Tech Stack</strong>
+  <p>FastAPI, Pandas, Numpy, SQL, Python (some React)</p>
+</div>
+
+<div id="kpmg_2" class="pagebreak">
+  <h3>KPMG Luxembourg</h3>
+  <h4>Through CBTW : from 05/2022 to 08/2022</h4>
   <hr />
-  <div id="prosieben" class="pagebreak">
-    <h3>ProSieben</h3>
-    <h4>Through CBTW: from 12/2022 to 04/2024</h4>
-    <p>Context:</p>
+  <p>Context:</p>
 
-    <p>ProSieben's Program Planners have a problem.</p>
-    <p>
-      The way movie licensing works is: A company buys the rights to play a
-      movie or show 𝑵 times over a period of 𝐘 years. As a program planner your
-      job is to optimize this, play a movie less than 𝑵 times and you've just
-      lost money, play it at the wrong time and you've just lost market share!
-      (ie: money)
-    </p>
-    <p>
-      Now, program planners are quite good at their jobs, but doing this sort of
-      planning on a large scale is tremendously difficult work.
-    </p>
-    <p>
-      The solution, was to ask the Data Science folks to come up with a model
-      that will first predict market shares(or, the fancier sounding: AI Based
-      Prediction), and then to build a second model that will attempt to create
-      an optimal program (using an even fancier sounding: Constraint
-      Satisfaction Solver)
-    </p>
-    <p>
-      The creation of these models necessitated a large amount of data.
-      Corralling, cleaning and exporting this data was the job of our
-      <em>ETL</em> pipeline.
-    </p>
+  <p>KPMG's HR have a problem.</p>
+  <p>
+    Every year they need to calculate raises and bonuses for each of the
+    employees. Back when the branch was a few hundred employees this was all
+    done on a massive excel spreadsheet; but suddenly the Luxembourgish branch
+    grew to a gargantuan 2000 employees and clearly some sort of app needed to
+    be made.
+  </p>
+  <p>They then made a grave mistake - they hired consultants.</p>
+  <p>
+    The consultants delivered a terrible mess. A C# back-end full of business
+    rules that contradict each other sprayed to-and-fro. A "classic" jQuery +
+    Bootstrap Front-End with yet more business rules that contradict the former
+    ones.
+  </p>
+  <p>
+    Nobody internal to the company wanted to work on this project, the problem
+    was that the code was bad, but not bad enough that they could redo the whole
+    thing; it had been trudging along, for 5 years, collecting patches left and
+    right to attempt to fill the leaks. However, it was clearly an important,
+    yet, sensitive project.
+  </p>
+  <p>So what could KPMG's HR team do? They hired more consultants (Me).</p>
+  <p>
+    (I hope the reader will understand that the context section was written with
+    sarcasm and exaggeration in mind. The codebase was quite rocky, but the team
+    was solid and we ended up doing a good job).
+  </p>
 
-    <strong>Wut I did:</strong>
-    <p>
-      I was initially hired as Python Developer; mostly to work on the App side
-      of the project
-    </p>
+  <strong>Wut I did:</strong>
+  <p>
+    I was the Front-End expert; for the majority of the project I worked alone,
+    and by the end I was training my replacement.
+  </p>
+  <p>
+    The interesting thing about being the sole Front-End expert is that you end
+    up acting as a sort of lightning rod for all of the problems with the
+    application, as non-technical people can't quite explain why something is
+    wrong, only that it is wrong. So we encountered success within the project
+    not due to technical skill, but due to clarity and patience.
+  </p>
+  <p>
+    The previous consultants were not very meticulous about their linting or the
+    code formatting; so setting up a proper pre-commit hook to ensure
+    code-quality was a tremendous boon. Setting up CI/CD was also crucial, as
+    before the code was built and pushed through good old ssh ( cowboy sys-admin
+    style ).
+  </p>
+  <p>
+    We also got rid of any cleverness, no more façades or dependency injections,
+    we wanted stupid boring code with lots of comments.
+  </p>
+  <p>
+    Dealing with confusing business rules was the great issue, the solution was
+    lots of calls with the relevant stake-holders.
+  </p>
+  <p>
+    It sounds tremendously obvious; but when the code would say something, the
+    manual another and the stake-holder a third thing it was faster to just call
+    and hash it out with a small meeting. Remote work tools were a tremendous
+    boon in this; we rarely spent more than 15 minutes on a call.
+  </p>
+  <p>
+    I was quite lucky to have a tremendous team, and a very patient HR liaison.
+    Sadly everyone was quite cross with us in the end; as the bonuses and raises
+    for that year were terrible.
+  </p>
 
-    <code>
-      <pre style="line-height: 21px">
-      UI ← App ← AI ← DB ← ETL
-           └─ I worked       │
-              here!          └ and here!
-    </pre
-      >
-    </code>
+  <strong>Tech Stack</strong>
+  <p>Typescript, React</p>
+</div>
 
-    <p>
-      Once I had proven myself on the <code>App</code> side of the project I was
-      able to transition into the <code>ETL</code> side of the project.
-    </p>
-    <p>
-      This was the first time I had the pleasure to work as a Data-Engineer. I'd
-      always wanted to dip my feet into the Data Science world but I never had
-      the opportunity before.
-    </p>
+<div id="noide">
+  <h3>Noide.fr</h3>
+  <h4>With CBTW: 05/2022</h4>
+  <hr />
+  <p>Context:</p>
+  <p>The owner of a small CBD shop had a problem: His website was ugly</p>
+  <p>
+    I had 2/3 days to redo the shoppify website and make it more like a figma
+    design the client agreed to.
+  </p>
+  <strong>Wut I did:</strong>
+  <p>Funny subject, terribly stressful to deliver a re-design in 2-3 days.</p>
+  <strong>Tech Stack</strong>
+  <p>Pure HTML+CSS+JS</p>
+</div>
 
-    <p>
-      Learned a lot of Pandas, a scientific python library; and I was able to
-      leverage my Front-End skills to create what we called "tiny-front-ends".
-      Basically small Websites as GUIs to quickly prototype features, while the
-      main Front-End team lagged behind.
-    </p>
+<div id="kpmg_1">
+  <h3>KPMG Luxembourg</h3>
+  <h4>With CBTW: from 11/2021 to 04/22022</h4>
+  <hr />
+  <p>Context:</p>
+  <p>
+    KPMG, one of the big four auditing firms, has a problem: They are tasked
+    with completing a variety of Risk Assessments on a yearly basis.
+  </p>
+  <p>
+    The idea was to standardize the reports; with department heads creating the
+    template on a per- client basis and then having the employees on the
+    lower-rung of the ladder fill them out. The trickiness came from both the
+    access rights to certain parts of the app (and the byzantine business rules
+    that guided these access rights). And the required back-and forth in between
+    the reports creator and their supervisor.
+  </p>
 
-    <strong>Tech Stack</strong>
-    <p>FastAPI, Pandas, Numpy, SQL, Python (some React)</p>
-  </div>
+  <strong>Wut I did:</strong>
+  <p>
+    Helped the small Front-End team develop the App. Worth noting is just how
+    tremendous the team was, a good separation of concerns led to a very fast
+    development cycle.
+  </p>
+  <strong>Tech Stack</strong>
+  <p>React, Typescript, using the FluentUI component framework</p>
+</div>
 
-  <div id="kpmg_2" class="pagebreak">
-    <h3>KPMG Luxembourg</h3>
-    <h4>Through CBTW : from 05/2022 to 08/2022</h4>
-    <hr />
-    <p>Context:</p>
+<div id="post" class="pagebreak">
+  <h3>POST Luxembourg</h3>
+  <h4>With CBTW: from 07/2020 to 02/2021</h4>
 
-    <p>KPMG's HR have a problem.</p>
-    <p>
-      Every year they need to calculate raises and bonuses for each of the
-      employees. Back when the branch was a few hundred employees this was all
-      done on a massive excel spreadsheet; but suddenly the Luxembourgish branch
-      grew to a gargantuan 2000 employees and clearly some sort of app needed to
-      be made.
-    </p>
-    <p>They then made a grave mistake - they hired consultants.</p>
-    <p>
-      The consultants delivered a terrible mess. A C# back-end full of business
-      rules that contradict each other sprayed to-and-fro. A "classic" jQuery +
-      Bootstrap Front-End with yet more business rules that contradict the
-      former ones.
-    </p>
-    <p>
-      Nobody internal to the company wanted to work on this project, the problem
-      was that the code was bad, but not bad enough that they could redo the
-      whole thing; it had been trudging along, for 5 years, collecting patches
-      left and right to attempt to fill the leaks. However, it was clearly an
-      important, yet, sensitive project.
-    </p>
-    <p>So what could KPMG's HR team do? They hired more consultants (Me).</p>
-    <p>
-      (I hope the reader will understand that the context section was written
-      with sarcasm and exaggeration in mind. The codebase was quite rocky, but
-      the team was solid and we ended up doing a good job).
-    </p>
+  <hr />
 
-    <strong>Wut I did:</strong>
-    <p>
-      I was the Front-End expert; for the majority of the project I worked
-      alone, and by the end I was training my replacement.
-    </p>
-    <p>
-      The interesting thing about being the sole Front-End expert is that you
-      end up acting as a sort of lightning rod for all of the problems with the
-      application, as non-technical people can't quite explain why something is
-      wrong, only that it is wrong. So we encountered success within the project
-      not due to technical skill, but due to clarity and patience.
-    </p>
-    <p>
-      The previous consultants were not very meticulous about their linting or
-      the code formatting; so setting up a proper pre-commit hook to ensure
-      code-quality was a tremendous boon. Setting up CI/CD was also crucial, as
-      before the code was built and pushed through good old ssh ( cowboy
-      sys-admin style ).
-    </p>
-    <p>
-      We also got rid of any cleverness, no more façades or dependency
-      injections, we wanted stupid boring code with lots of comments.
-    </p>
-    <p>
-      Dealing with confusing business rules was the great issue, the solution
-      was lots of calls with the relevant stake-holders.
-    </p>
-    <p>
-      It sounds tremendously obvious; but when the code would say something, the
-      manual another and the stake-holder a third thing it was faster to just
-      call and hash it out with a small meeting. Remote work tools were a
-      tremendous boon in this; we rarely spent more than 15 minutes on a call.
-    </p>
-    <p>
-      I was quite lucky to have a tremendous team, and a very patient HR
-      liaison. Sadly everyone was quite cross with us in the end; as the bonuses
-      and raises for that year were terrible.
-    </p>
+  <p>Context:</p>
+  <p>
+    POST Luxembourg, a telecommunications company, has a problem: Legacy code
+  </p>
+  <p>
+    For the past 6 years POST had been developing a software to display
+    information regarding their data center's inventory. The app shifted from a
+    classic LAMP stack over to Django; I took over the app and modernized the
+    architecture.
+  </p>
+  <strong>Wut I did:</strong>
+  <p>Re-implemented the front-end with React + Typescript.</p>
+  <p>
+    Converted the classic MVC type views into to a more API friendly style
+    (Heavy rewriting involved)
+  </p>
+  <p>
+    Managed Migration to Device42 through the creation of scripts and libraries
+    for the new system
+  </p>
+  <strong>Tech Stack</strong>
+  <p>Django, php, react, mysql, traefik, docker, python</p>
+</div>
 
-    <strong>Tech Stack</strong>
-    <p>Typescript, React</p>
-  </div>
+<div id="orange">
+  <h3>Orange S.A.</h3>
+  <h4>With AKKA: 6 months</h4>
 
-  <div id="noide">
-    <h3>Noide.fr</h3>
-    <h4>With CBTW: 05/2022</h4>
-    <hr />
-    <p>Context:</p>
-    <p>The owner of a small CBD shop had a problem: His website was ugly</p>
-    <p>
-      I had 2/3 days to redo the shoppify website and make it more like a figma
-      design the client agreed to.
-    </p>
-    <strong>Wut I did:</strong>
-    <p>Funny subject, terribly stressful to deliver a re-design in 2-3 days.</p>
-    <strong>Tech Stack</strong>
-    <p>Pure HTML+CSS+JS</p>
-  </div>
+  <hr />
+  <p>Context:</p>
+  <p>
+    Orange, yet another telecommunications giant, has a problem: Legacy Code
+  </p>
 
-  <div id="kpmg_1">
-    <h3>KPMG Luxembourg</h3>
-    <h4>With CBTW: from 11/2021 to 04/22022</h4>
-    <hr />
-    <p>Context:</p>
-    <p>
-      KPMG, one of the big four auditing firms, has a problem: They are tasked
-      with completing a variety of Risk Assessments on a yearly basis.
-    </p>
-    <p>
-      The idea was to standardize the reports; with department heads creating
-      the template on a per- client basis and then having the employees on the
-      lower-rung of the ladder fill them out. The trickiness came from both the
-      access rights to certain parts of the app (and the byzantine business
-      rules that guided these access rights). And the required back-and forth in
-      between the reports creator and their supervisor.
-    </p>
+  <p>
+    The Streams Cœur Mobile interface allowed users to execute dynamic queries
+    on a data base that had more than 200 million entries and display them in a
+    visually appealing manner. The GUI was written as a Java Applet, and it was
+    my job to re-write it.
+  </p>
+  <strong>Wut I did:</strong>
+  <p>
+    Created both the back-end and front-end of the interface, using an PHP
+    framework designed by Orange.
+  </p>
+  <strong>Tech Stack</strong>
+  <p>LAMP, MariaDB, Javascript, Sass, Jquery</p>
+</div>
 
-    <strong>Wut I did:</strong>
-    <p>
-      Helped the small Front-End team develop the App. Worth noting is just how
-      tremendous the team was, a good separation of concerns led to a very fast
-      development cycle.
-    </p>
-    <strong>Tech Stack</strong>
-    <p>React, Typescript, using the FluentUI component framework</p>
-  </div>
+<div id="hyper">
+  <h3>Hyperloop Transportation Technologies</h3>
 
-  <div id="post" class="pagebreak">
-    <h3>POST Luxembourg</h3>
-    <h4>With CBTW: from 07/2020 to 02/2021</h4>
+  <h4>With AKKA: 6 months</h4>
+  <hr />
+  <p>Context:</p>
+  <p>
+    The Hyperloop...well the hyperloop has a
+    <a
+      href="https://www.youtube.com/watch?v=CQJgFh_e01g&pp=ygUSaHlwZXJsb29wIGRpc2FzdGVy"
+      >lot of problems.</a
+    >
+  </p>
+  <p>
+    I joined the R&D team at HTT in Toulouse as an on-site computer programmer.
+    My main task was to advise the team on Cloud Storage, as well as to serve as
+    a computer programmer for a variety of tiny projects.
+  </p>
+  <strong>Wut I did:</strong>
+  <p>Developed a "grep" like tool for Microsoft Word (it was a huge hit).</p>
+  <p>
+    Advised the team on the current solutions for cloud storage available in the
+    market.
+  </p>
+  <p>Created a Thermal Nodal simulator of the Hyperloop Tube.</p>
+  <p>Helped the R&D team develop research-oriented Software.</p>
+  <p>Cleaned up the HR excel files (Look - it was early in my career).</p>
+  <strong>Tech Stack</strong>
+  Python, Electron
+</div>
+<div id="sigfox">
+  <h3>Sigfox</h3>
+  <h4>With AKKA: 4 months</h4>
+  <hr />
+  <p>Context:</p>
+  <p>
+    SIGFOX, an IOT company, has a problem: They need to teach their users how to
+    use their expensive IOT technology at a minimal cost of entry.
+  </p>
+  <p>
+    SIGFOX created a small and cheap entry level kit for customers to play with
+    beforing plunging into the world of IOT. The focus of the project was to
+    create a complete simulation of the SIGFOX backend.
+  </p>
 
-    <hr />
-
-    <p>Context:</p>
-    <p>
-      POST Luxembourg, a telecommunications company, has a problem: Legacy code
-    </p>
-    <p>
-      For the past 6 years POST had been developing a software to display
-      information regarding their data center's inventory. The app shifted from
-      a classic LAMP stack over to Django; I took over the app and modernized
-      the architecture.
-    </p>
-    <strong>Wut I did:</strong>
-    <p>Re-implemented the front-end with React + Typescript.</p>
-    <p>
-      Converted the classic MVC type views into to a more API friendly style
-      (Heavy rewriting involved)
-    </p>
-    <p>
-      Managed Migration to Device42 through the creation of scripts and
-      libraries for the new system
-    </p>
-    <strong>Tech Stack</strong>
-    <p>Django, php, react, mysql, traefik, docker, python</p>
-  </div>
-
-  <div id="orange">
-    <h3>Orange S.A.</h3>
-    <h4>With AKKA: 6 months</h4>
-
-    <hr />
-    <p>Context:</p>
-    <p>
-      Orange, yet another telecommunications giant, has a problem: Legacy Code
-    </p>
-
-    <p>
-      The Streams Cœur Mobile interface allowed users to execute dynamic queries
-      on a data base that had more than 200 million entries and display them in
-      a visually appealing manner. The GUI was written as a Java Applet, and it
-      was my job to re-write it.
-    </p>
-    <strong>Wut I did:</strong>
-    <p>
-      Created both the back-end and front-end of the interface, using an PHP
-      framework designed by Orange.
-    </p>
-    <strong>Tech Stack</strong>
-    <p>LAMP, MariaDB, Javascript, Sass, Jquery</p>
-  </div>
-
-  <div id="hyper">
-    <h3>Hyperloop Transportation Technologies</h3>
-
-    <h4>With AKKA: 6 months</h4>
-    <hr />
-    <p>Context:</p>
-    <p>
-      The Hyperloop...well the hyperloop has a
-      <a
-        href="https://www.youtube.com/watch?v=CQJgFh_e01g&pp=ygUSaHlwZXJsb29wIGRpc2FzdGVy"
-        >lot of problems.</a
-      >
-    </p>
-    <p>
-      I joined the R&D team at HTT in Toulouse as an on-site computer
-      programmer. My main task was to advise the team on Cloud Storage, as well
-      as to serve as a computer programmer for a variety of tiny projects.
-    </p>
-    <strong>Wut I did:</strong>
-    <p>Developed a "grep" like tool for Microsoft Word (it was a huge hit).</p>
-    <p>
-      Advised the team on the current solutions for cloud storage available in
-      the market.
-    </p>
-    <p>Created a Thermal Nodal simulator of the Hyperloop Tube.</p>
-    <p>Helped the R&D team develop research-oriented Software.</p>
-    <p>Cleaned up the HR excel files (Look - it was early in my career).</p>
-    <strong>Tech Stack</strong>
-    Python, Electron
-  </div>
-  <div id="sigfox">
-    <h3>Sigfox</h3>
-    <h4>With AKKA: 4 months</h4>
-    <hr />
-    <p>Context:</p>
-    <p>
-      SIGFOX, an IOT company, has a problem: They need to teach their users how
-      to use their expensive IOT technology at a minimal cost of entry.
-    </p>
-    <p>
-      SIGFOX created a small and cheap entry level kit for customers to play
-      with beforing plunging into the world of IOT. The focus of the project was
-      to create a complete simulation of the SIGFOX backend.
-    </p>
-
-    <strong>Wut I did:</strong>
-    <p>
-      Created a testing suite for the Front-End, through the use of the testing
-      framework Selenium.
-    </p>
-    <p>Developed new functionalities for the Python server.</p>
-    <p>Further improved some sections of the Front-End.</p>
-    <strong>Tech Stack</strong>
-    Python (with a particular focus on the async library), Docker, Selenium.
-  </div>
-</body>
+  <strong>Wut I did:</strong>
+  <p>
+    Created a testing suite for the Front-End, through the use of the testing
+    framework Selenium.
+  </p>
+  <p>Developed new functionalities for the Python server.</p>
+  <p>Further improved some sections of the Front-End.</p>
+  <strong>Tech Stack</strong>
+  Python (with a particular focus on the async library), Docker, Selenium.
+</div>
 
 <script>
   // Fix tooltips for movile
@@ -678,9 +675,9 @@
     });
   }
 
+  let timeout = undefined;
   // Not ideal since if the user goes in and out it doesn't work as well.
-  // I'm going to call this close enough since I don't want to add a library
-  // like framer/motion
+  // I'm going to call this close enough
   document.querySelectorAll(".with_boop").forEach((booper) => {
     booper.addEventListener("animationend", () => {
       booper.classList.remove("boop_animation");
@@ -695,12 +692,6 @@
 </script>
 
 <style>
-  @media (prefers-reduced-motion: reduce) {
-    .fancy-box {
-      transition: none;
-    }
-  }
-
   /* Un-important styles here */
 
   /* BOOP - ask me how I got this cute animation in an interview :)*/
